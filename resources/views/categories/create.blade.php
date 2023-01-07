@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex m-2 p-2">
                 <a href="{{ route('categories.index') }}"
-                    class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white"style = "color : rgb(7, 109, 149); border: solid 2px rgb(7, 109, 149);">Category Index</a>
+                    class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white"> < Back</a>
             </div>
-            <div class="m-2 p-2 bg-slate-100 rounded">
+            <div class="m-2 p-2 bg-slate-100 rounded px-24">
                 <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
                     <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
                         @csrf
@@ -47,7 +47,7 @@
                         </div>
                         <div class="mt-6 p-4">
                             <button type="submit"
-                                class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg " style = "color : rgb(7, 109, 149); border: solid 2px rgb(7, 109, 149);"> Save Item</button>
+                                class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white "> Save Item</button>
                         </div>
                     </form>
                 </div>

@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'App\Http\Controllers\Controller@home' )->name('home');
+Route::post('/reserve', 'App\Http\Controllers\Controller@reserve' )->name('reserve');
+Route::get('/logout', 'App\Http\Controllers\Controller@logout' )->name('logout')->middleware('auth');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

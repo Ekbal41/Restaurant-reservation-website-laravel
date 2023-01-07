@@ -10,7 +10,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+                    Welcome to your dashboard!
+                    You can got to your profile by clicking on your name in the top right corner.<br>
+                    Visit home by click in this link    <a style="color:green; font-size: 50px; font-weight:bolder" href="{{ route('home') }}">  Meat Master.  </a>
+                    All yor reservations are listed below.
                 </div>
             </div>
         </div>
