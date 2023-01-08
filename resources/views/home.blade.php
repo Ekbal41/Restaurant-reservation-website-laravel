@@ -41,6 +41,9 @@
             scroll-behavior: smooth;
         }
     </style>
+    <script>
+        $('.alert').alert()
+    </script>
 
 
 </head>
@@ -81,7 +84,7 @@
 
                     <li> <a href="#food-menu"> Food Categories</a></li>
                     <?php if (Auth::user()) { ?>
-                    <li><a href="/logout"><i class="bi bi-door-open"></i></a></li>
+                    <li><a href="{{ route('dashboard') }}"><i class="bi bi-bag-dash-fill"></i></i></a></li>
                     <?php } ?>
                     <?php if (!Auth::user()) { ?>
                     <li><a href="/register"><i class="bi bi-person-circle"></i></a></li>
@@ -101,13 +104,22 @@
     <div id="header">
         <div class="bg-overlay"></div>
         <div class="center text-center">
+
+           
             <div class="banner">
-                <h1 class=""style="margin-top: 200px">Meat Master</h1>
+                <h1 class=""style="margin-top: 270px">Meat Master</i></h1>
             </div>
             <div class="subtitle">
-                <h4> AN AWESOME RESTAURANT</h4>
+                <h4> AN AWSOME RESTAURENT</h4>
             </div>
+            @if (session('msg'))
+            <h4 style="color: rgb(238, 255, 0);">{{ session('msg') }}</h4>
+        @endif
+
+
+
         </div>
+
         <div class="bottom text-center">
             <a id="scrollDownArrow" href="#special-offser"><i class="fa fa-chevron-down"></i></a>
         </div>
@@ -306,14 +318,28 @@
                             @enderror
                         </div>
                         <div class="row">
+                            <?php if (Auth::user()) { ?>
                             <div class="col-lg-6 col-md-6 form-group">
                                 <label class="sr-only" for="email1">email</label>
                                 <input class="form-control hint" type="email" id="email1" name="email"
-                                    placeholder="Email@domain.com" required="">
+                                    value="{{ Auth::user()->email }}" placeholder="Email@domain.com" required="">
                             </div>
                             @error('email')
                                 <div class="text-sm text-red-400">{{ $message }}</div>
                             @enderror
+                            <?php } ?>
+
+
+                            <?php if (!Auth::user()) { ?>
+                            <div class="col-lg-6 col-md-6 form-group">
+                                <label class="sr-only" for="email1">email</label>
+                                <input class="form-control hint" type="email" id="email1" name="email"
+                                    disabled placeholder="Please log in First" required="">
+                            </div>
+                            @error('email')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
+                            <?php } ?>
                             <div class="col-lg-6 col-md-6 form-group">
                                 <label class="sr-only" for="phone1">phone</label>
                                 <input class="form-control hint" type="text" id="phone1" name="tel_number"
@@ -326,10 +352,11 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 form-group">
                                 <label class="sr-only" for="reserv_date1"> </label>
-                                <input class="form-control hint" type="datetime-local" id="reserv_date1" name="res_date">
-                               
+                                <input class="form-control hint" type="datetime-local" id="reserv_date1"
+                                    name="res_date">
+
                             </div>
-                            
+
 
 
                             @error('res_date')
@@ -345,8 +372,8 @@
                             @enderror
                         </div>
                         <div class="row">
-                            <label for="status" style="color:rgb(129, 122, 122);margin-left:155px;">Table</label>
-                            <div class="mt-1 " style="width: 300px; margin-left:150px; margin-bottom: 20px">
+
+                            <div class="mt-1 col-lg-6 col-md-6 form-group ">
                                 <select id="table_id" name="table_id" class="form-control hint ">
                                     @foreach ($tables as $table)
                                         <option value="{{ $table->id }}">{{ $table->name }}
@@ -358,17 +385,25 @@
                             @error('table_id')
                                 <div class="text-sm text-red-400">{{ $message }}</div>
                             @enderror
-                           
+
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
-                                <p>We will be happy to reserve a table for you. Please fill in the form up and press "Reserve". We will
+
+                                <p>We will be happy to reserve a table for you. Please fill in the form up and press
+                                    "Reserve". We will
                                     contact you shortly.</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
+                                <?php if (Auth::user()) { ?>
                                 <button type="submit" class="btn btn-danger btn-lg">Reserve!</button>
+                                <?php } ?>
+                                <?php if (!Auth::user()) { ?>
+                                <button type="submit" class="btn btn-danger btn-lg" disabled>Log in to
+                                    Reserve!</button>
+                                <?php } ?>
                             </div>
                         </div>
                     </form>

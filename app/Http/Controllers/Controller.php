@@ -36,17 +36,17 @@ class Controller extends BaseController
     {
         $table = Table::findOrFail($request->table_id);
         if ($request->guest_number > $table->guest_number) {
-            return back()->with('warning', 'Please choose the table base on guests.');
+            return back()->with('msg', 'Please choose the table base on guests.');
         }
         $request_date = Carbon::parse($request->res_date);
         foreach ($table->reservations as $res) {
             if ($res->res_date->format('Y-m-d') == $request_date->format('Y-m-d')) {
-                return back()->with('warning', 'This table is reserved for this date.');
+                return back()->with('msg', 'This table is reserved for this date.');
             }
         }
         Reservation::create($request->validated());
 
-        return to_route('home')->with('success', 'Reservation created successfully.');
+        return to_route('home')->with('msg', 'Reservation created successfully.');
 
         
         
@@ -54,4 +54,10 @@ class Controller extends BaseController
     public function logout() {
         return to_route('home')->with(Auth::logout());
       }
+
+    public function dashboard()
+    {
+        $reservation_of_user = Reservation::where('email', Auth::user()->email)->get();
+        return view('dashboard', ['reservations' => $reservation_of_user]);
+    }
 }

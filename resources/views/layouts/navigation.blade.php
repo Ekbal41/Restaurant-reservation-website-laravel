@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                    
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('admin')">
+                        <x-nav-link :href="route('dashboard')">
                             {{ __('User Dashboard') }}
                         </x-nav-link>
                    
@@ -40,7 +40,7 @@
                         </button>
                     </x-slot>
 
-                    <x-slot name="content">
+                    <x-slot name="content" style="z-index: 266">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
